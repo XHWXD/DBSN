@@ -117,23 +117,16 @@ class DnDataset(BaseDataset):
         return img + noise 
     def _add_noise_poisson_gaussian(self, img):
         # implemented in paper
-        if self.split == 'val':
-            np.random.seed(seed=0)
         noiseLevel = [v/255. for v in self.get_noiseL()]
         sigma_s = noiseLevel[0]
         sigma_c = noiseLevel[1]
+        if self.split == 'val':
+            np.random.seed(seed=0)
         n1 = np.random.randn(*img.shape)*sigma_s*img
+        if self.split == 'val':
+            np.random.seed(seed=0)
         n2 = np.random.randn(*img.shape)*sigma_c
         noise = (n1 + n2).astype(np.float32)
-        return img + noise 
-    def _add_noise_poisson_gaussian_correct(self, img):
-        if self.split == 'val':
-            np.random.seed(seed=0)
-        noiseLevel = [v/255. for v in self.get_noiseL()]
-        sigma_s = noiseLevel[0]
-        sigma_c = noiseLevel[1]
-        noiseL = np.sqrt((sigma_s**2)*img+(sigma_c**2))
-        noise = (np.random.randn(*img.shape)*noiseL).astype(np.float32)
         return img + noise 
     def _add_noise_poisson_gaussian_blind(self, img):
         if self.split == 'val':
