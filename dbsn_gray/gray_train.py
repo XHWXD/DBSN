@@ -211,7 +211,6 @@ def main(args):
                 # forward
                 mu_out_val, mid_out_val = dbsn_model(img_noise_val)
                 sigma_mu_out_val = sigma_mu_model(mid_out_val)
-                sigma_n_out_val = sigma_n_model(mu_out_val)
                 # 
                 sigma_mu_val = sigma_mu_out_val ** 2
                 if args.noise_type == 'gaussian':

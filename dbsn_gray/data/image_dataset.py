@@ -7,7 +7,7 @@ from . import imlib
 
 rootlist = {
     'bsd68': [
-        '/home/xhwu/denoising/datasets/bsd68',
+        './datasets/CBSD68',
     ],
     'set12': [
         '/home/xhwu/denoising/datasets/set12',
